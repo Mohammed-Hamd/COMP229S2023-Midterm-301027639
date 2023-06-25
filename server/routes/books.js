@@ -25,7 +25,7 @@ router.get('/', (req, res, next) => {
 
 //  GET the Book Details page in order to add a new Book
 router.get('/add', (req, res, next) => {
-  
+  //Direct to details page
   res.render('books/details', {
     title: 'Add a Book',
     books: '',
@@ -36,7 +36,7 @@ router.get('/add', (req, res, next) => {
 
 // POST process the Book Details page and create a new Book - CREATE
 router.post('/add', (req, res, next) => {
-  
+  //Gets data from form
   let data = req.body; 
   const newBook = {
     Title: data.title,
@@ -45,7 +45,7 @@ router.post('/add', (req, res, next) => {
     Author: data.author,
     Genre: data.genre
   }
-
+ //Create books in MongoDB
   book.create(newBook, function(err, result) {
     if (err) {
       res.send(err);
@@ -62,7 +62,7 @@ router.get('/:id', (req, res, next) => {
       return console.error(err);
     }
     else {
-      
+      //Direct to details page
       res.render('books/details', {
         title: 'Edit a Book',
         books: book,
@@ -75,7 +75,7 @@ router.get('/:id', (req, res, next) => {
 
 // POST - process the information passed from the details form and update the document
 router.post('/:id', (req, res, next) => {
-    
+    //Gets data from form
     let data = req.body;
     const upsertData = {
       Title: data.title,
